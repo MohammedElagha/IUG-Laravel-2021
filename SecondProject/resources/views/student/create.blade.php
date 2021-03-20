@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-12">
 			
-			<form action="{{ URL('student/create') }}" method="POST">
+			<form action="{{ URL('student/create/' . '55') }}" method="GET">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 				<div class="form-group">

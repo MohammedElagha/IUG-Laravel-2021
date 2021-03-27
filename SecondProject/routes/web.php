@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('student/create', 'Student\StudentController@create');
-Route::get('student/store/{collage_id}', 'Student\StudentController@store');
+Route::post('student/store/{collage_id}', 'Student\StudentController@store');

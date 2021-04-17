@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Student;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Student;
+
+// insert, update, delete, select
+
 
 class StudentController extends Controller
 {
@@ -19,16 +23,16 @@ class StudentController extends Controller
     	$birth_date = $request['birth_date'];
     	$nationality = $request['nationality'];
 
-    	# insert into students (name, birth_date, nationality) values ('$name', '$birth_date', '$nationality')
+    	$student = new Student();
+        $student->name = $name;
+        $student->birth_date = $birth_date;
+        $student->nationality = $nationality;
 
-        $result = DB::table('students')->insert(['name' => $name , 'birth_date' => $birth_date , 'nationality' => $nationality]);
-
-        dd($result);
+        $result = $student->save();
     }
 
     public function index () {
-        $students = DB::table('students')
-                    ->select('id', 'name', 'nationality', 'birth_date')
+        $students = Student::select('id', 'name', 'nationality', 'birth_date')
                     ->get();
         # collection of objects
 
@@ -48,17 +52,44 @@ class StudentController extends Controller
     	$birth_date = $request['birth_date'];
     	$nationality = $request['nationality'];
 
-    	$result = DB::table('students')->where('id', $id)->update(['name' => $name , 'birth_date' => $birth_date , 'nationality' => $nationality]);
+    	// $result = Student::where('id', $id)->update(['name' => $name , 'birth_date' => $birth_date , 'nationality' => $nationality]);
+
+        $student = Student::where('id', $id)->first();
+
+        $student->name = $name;
+        $student->birth_date = $birth_date;
+        $student->nationality = $nationality;
+
+        $student->save();
 
         return redirect()->back();
     }
 
     public function destroy ($id) {
-    	$result = DB::table('students')->where('id', $id)->delete();
+    	$result = Student::where('id', $id)->delete();
+        return redirect()->back();
+    }
+
+    public function restore ($id) {
+        $result = Student::withTrashed()->where('id', $id)->restore();
         return redirect()->back();
     }
 }
 
+
+
+/*
+
+Student::select('name', 'email')->get();
+Student::withTrashed()->select('name', 'email', 'deleted_at')->get();
+Student::onlyTrashed()->select('name', 'email', 'deleted_at')->get();
+
+
+Student::join('registered_courses', 'students.id', 'registered_courses.student_id')
+        ->join('courses', 'registered_courses.course_id', 'courses.id')
+        ->whereNull('registered_courses.deleted_at');
+
+*/
 
 
 

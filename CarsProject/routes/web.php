@@ -21,3 +21,6 @@ Route::get('car', 'CarController@index');
 Route::get('mechanic', 'MechanicController@index');
 Route::get('student', 'StudentController@index');
 Route::get('student/withMainCourses', 'StudentController@index_2');
+
+Route::get('car/create', 'CarController@create');
+Route::post('car/store', 'CarController@store');

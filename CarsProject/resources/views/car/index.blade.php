@@ -8,6 +8,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+
+				<a href="{{ URL('mechanic') }}">Go to Mechanics</a>
+
 				<table class="table table-bordered">
 					<thead>
 						<tr>

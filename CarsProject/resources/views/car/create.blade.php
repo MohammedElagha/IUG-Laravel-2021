@@ -8,6 +8,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
+				@foreach ($errors->all() as $message)
+					<div class="alert alert-danger">{{ $message }}</div>
+				@endforeach
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-12">
 				<form method="POST" enctype="multipart/form-data" action="{{ URL('car/store') }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 

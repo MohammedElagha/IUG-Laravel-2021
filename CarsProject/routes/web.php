@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('owner', 'OwnerController@index');
+Route::post('owner', 'OwnerController@index');
 Route::get('car', 'CarController@index');
 Route::get('mechanic', 'MechanicController@index');
 Route::get('student', 'StudentController@index');
@@ -24,3 +24,6 @@ Route::get('student/withMainCourses', 'StudentController@index_2');
 
 Route::get('car/create', 'CarController@create');
 Route::post('car/store', 'CarController@store');
+
+
+// get, post, put, patch, delete

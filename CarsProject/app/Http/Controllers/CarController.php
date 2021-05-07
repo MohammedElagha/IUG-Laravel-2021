@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Car;
 use App\Mechanic;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\CarRequest;
 
 class CarController extends Controller
 { 
@@ -17,7 +18,7 @@ class CarController extends Controller
     		$car->image = $img_link;
     	}
 
-    	dd($cars->toArray());
+    	// dd($cars->toArray());
     	return view('car.index')->with('cars', $cars);
     }
 
@@ -28,7 +29,7 @@ class CarController extends Controller
     }
 
 
-    public function store (Request $request) {
+    public function store (CarRequest $request) {
     	/*
 		
 		1. get file from request
@@ -38,6 +39,7 @@ class CarController extends Controller
 		5. verify
 
     	*/
+
 
 		$image = $request->file('image');
 

@@ -14,6 +14,7 @@
 			
 			<form action="{{ URL('student/update/' . $student->id) }}" method="POST">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="_method" value="PUT">
 
 				<div class="form-group">
 					<label for="name">Student Name</label>

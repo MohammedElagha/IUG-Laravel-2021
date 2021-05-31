@@ -19,13 +19,21 @@ class CarController extends Controller
     	}
 
     	// dd($cars->toArray());
+
+
+    	session(['user_id' => 15 , 'user_name' => 'Mohammed']);
+
+
     	return view('car.index')->with('cars', $cars);
     }
 
 
     public function create () {
     	$mechanics = Mechanic::select('id', 'name')->get();
-    	return view('car.create')->with('mechanics', $mechanics);
+
+    	$user_id = session('user_id');
+
+    	return view('car.create')->with('mechanics', $mechanics)->with('user_id', $user_id);
     }
 
 

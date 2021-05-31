@@ -5,6 +5,13 @@
 </head>
 <body>
 
+	<h1>{{ $user_id }}</h1>
+	<h1>
+		@if (session()->has('user_id'))
+			{{ session('user_id') }}
+		@endif
+	</h1>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-12">

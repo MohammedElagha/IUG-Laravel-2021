@@ -22,20 +22,22 @@ class CarController extends Controller
 
 
     	session(['user_id' => 15 , 'user_name' => 'Mohammed']);
+    	// Session::put('user_id', 15);
 
 
     	return view('car.index')->with('cars', $cars);
+    	// return View::make('car.index', ['cars', $cars]);
     }
 
 
     public function create () {
     	$mechanics = Mechanic::select('id', 'name')->get();
 
-    	$user_id = session('user_id');
+    	// $user_id = session('user_id');
 
-    	return view('car.create')->with('mechanics', $mechanics)->with('user_id', $user_id);
+    	return view('car.create')->with('mechanics', $mechanics);
+    	/*->with('user_id', $user_id)*/
     }
-
 
     public function store (CarRequest $request) {
     	/*
@@ -73,8 +75,8 @@ class CarController extends Controller
 		$car->model = $model;
 		$car->mechanic_id = $mechanic_id;
 		$car->image = $path.$name;
-		$car->save();
+		$result = $car->save();
 
-		return redirect()->back();
+		return redirect()->back()->with('add_status', $result);
     }
 }

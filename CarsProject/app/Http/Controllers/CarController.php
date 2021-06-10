@@ -6,27 +6,62 @@ use Illuminate\Http\Request;
 use App\Car;
 use App\Mechanic;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CarRequest;
+use App\Http\Traits\CarPriceComputeTrait;
 
 class CarController extends Controller
 { 
-    public function index () {
-    	$cars = Car::with('owner')->with('mechanic')->select('*')->get();
 
-    	foreach ($cars as $car) {
-    		$img_link = Storage::url($car->image);
-    		$car->image = $img_link;
-    	}
+    use CarPriceComputeTrait;
+
+    public function index (Request $request) {
+    	// if ($request->headers->has('Lang')) {
+    	// 	$cars = Car::with('owner')->with('mechanic')->select('*')->get();
+
+	    // 	foreach ($cars as $car) {
+	    // 		$img_link = Storage::url($car->image);
+	    // 		$car->image = $img_link;
+	    // 	}
+
+	    // 	return view('car.index')->with('cars', $cars);
+    	// } else {
+    	// 	return view('errors.missing');
+    	// }
+
+    	
 
     	// dd($cars->toArray());
 
 
-    	session(['user_id' => 15 , 'user_name' => 'Mohammed']);
+    	// session(['user_id' => 15 , 'user_name' => 'Mohammed']);
     	// Session::put('user_id', 15);
 
 
+
+    	// dd(Auth::user());
+    	// dd(Auth::user()->name);
+
+        // $CarPriceComputeController = new CarPriceComputeController;
+
+
+        $cars = Car::with('owner')->with('mechanic')->select('*')->get();
+
+        foreach ($cars as $car) {
+            $img_link = Storage::url($car->image);
+            $car->image = $img_link;
+
+
+            $price_after_discount = $this->compute_car_price_after_discount($car);
+            $price_after_tax = $this->compute_car_price_after_tax($car, $price_after_discount);
+
+            $car->final_price = $price_after_tax;
+        }
+
+
+
+
     	return view('car.index')->with('cars', $cars);
-    	// return View::make('car.index', ['cars', $cars]);
     }
 
 

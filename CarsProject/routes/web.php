@@ -11,15 +11,19 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::post('owner', 'OwnerController@index');
-Route::get('car', 'CarController@index');
-Route::get('mechanic', 'MechanicController@index');
-Route::get('student', 'StudentController@index');
+Route::get('owner', 'OwnerController@index')->middleware(['lang', 'timezone']);
+Route::get('car', 'CarController@index')->middleware('auth');
+Route::get('mechanic', 'MechanicController@index')->middleware('lang');
+Route::get('student', 'StudentController@index')->middleware('timezone');
 Route::get('student/withMainCourses', 'StudentController@index_2');
 
 Route::get('car/create', 'CarController@create');
@@ -27,3 +31,7 @@ Route::post('car/store', 'CarController@store');
 
 
 // get, post, put, patch, delete
+
+
+
+

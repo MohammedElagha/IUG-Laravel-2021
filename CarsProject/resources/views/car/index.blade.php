@@ -17,6 +17,10 @@
 							<th>Image</th>
 							<th>Model</th>
 							<th>Mechanic</th>
+							<th>Price</th>
+							<th>Discount %</th>
+							<th>Tax %</th>
+							<th>Final Price</th>
 						</tr>
 					</thead>
 
@@ -26,6 +30,10 @@
 								<td><img src="{{ $car->image }}"></td>
 								<td>{{ $car->model }}</td>
 								<td>{{ $car->mechanic->name }}</td>
+								<td>{{ $car->price }} $</td>
+								<td>{{ $car->discount_percent }} %</td>
+								<td>{{ $car->tax_percent }} %</td>
+								<td>{{ $car->final_price }} $</td>
 							</tr>
 						@endforeach
 					</tbody>

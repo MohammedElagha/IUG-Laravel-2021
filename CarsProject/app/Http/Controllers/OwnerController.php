@@ -7,10 +7,12 @@ use App\Owner;
 
 class OwnerController extends Controller
 {
-    public function index () {
+    public function index (Request $request) {
+    	dd($request['current_timestamp']);
+
     	$owners = Owner::with('car')->with('car.mechanic')->select('*')->get();
-    	dd($owners->toArray());
-    	// return view('owner.index')->with('owners', $owners);
+    	// dd($owners->toArray());
+    	return view('owner.index')->with('owners', $owners);
     }
 }
 

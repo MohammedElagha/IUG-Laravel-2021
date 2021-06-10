@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CarRequest;
 use App\Http\Traits\CarPriceComputeTrait;
+use App;
 
 class CarController extends Controller
 { 
@@ -44,6 +45,8 @@ class CarController extends Controller
 
         // $CarPriceComputeController = new CarPriceComputeController;
 
+        App::setLocale('en');
+
 
         $cars = Car::with('owner')->with('mechanic')->select('*')->get();
 
@@ -66,6 +69,8 @@ class CarController extends Controller
 
 
     public function create () {
+        App::setLocale('ar');
+
     	$mechanics = Mechanic::select('id', 'name')->get();
 
     	// $user_id = session('user_id');

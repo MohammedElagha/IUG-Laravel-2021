@@ -14,12 +14,12 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th>Image</th>
+							<th>@lang('dashboard.car.image')</th>
 							<th>Model</th>
 							<th>Mechanic</th>
-							<th>Price</th>
+							<th>@lang('dashboard.car.price')</th>
 							<th>Discount %</th>
-							<th>Tax %</th>
+							<th>@lang('dashboard.car.tax') %</th>
 							<th>Final Price</th>
 						</tr>
 					</thead>

@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'lang' => \App\Http\Middleware\CheckLangHeader::class,
         'timezone' => \App\Http\Middleware\CheckTimeZoneParam::class,
+        'exception' => \App\Http\Middleware\HandleException::class,
     ];
 
     /**

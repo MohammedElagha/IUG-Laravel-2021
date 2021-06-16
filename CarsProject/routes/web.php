@@ -21,13 +21,13 @@ Route::get('/', function () {
 
 
 Route::get('owner', 'OwnerController@index')->middleware(['lang', 'timezone']);
-Route::get('car', 'CarController@index')->middleware('auth');
-Route::get('mechanic', 'MechanicController@index')->middleware('lang');
-Route::get('student', 'StudentController@index')->middleware('timezone');
-Route::get('student/withMainCourses', 'StudentController@index_2');
+Route::get('car', 'CarController@index')->middleware(['auth']);
+Route::get('mechanic', 'MechanicController@index')->middleware(['lang']);
+Route::get('student', 'StudentController@index')->middleware(['timezone']);
+Route::get('student/withMainCourses', 'StudentController@index_2')->middleware([]);
 
-Route::get('car/create', 'CarController@create');
-Route::post('car/store', 'CarController@store');
+Route::get('car/create', 'CarController@create')->middleware([]);
+Route::post('car/store', 'CarController@store')->middleware([]);
 
 
 // get, post, put, patch, delete
